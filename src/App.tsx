@@ -1,0 +1,66 @@
+import { useState } from "react"
+import Dashboard from "./components/Dashboard"
+import Sidebar from "./components/Sidebar"
+import { Menu } from "lucide-react"
+
+const App = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  return (
+    <div className="h-screen flex overflow-hidden bg-gray-50">
+
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={`
+          fixed lg:static inset-y-0 left-0 z-50
+          w-72 bg-white border-r border-gray-200
+          transform transition-transform duration-300 ease-in-out
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          flex flex-col
+        `}
+      >
+        <Sidebar />
+      </aside>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top Bar */}
+        <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center">
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 mr-2"
+            aria-label="Toggle sidebar"
+          >
+            <Menu size={24} />
+          </button>
+
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="hidden lg:block p-2 rounded-lg hover:bg-gray-100 mr-2"
+            aria-label="Toggle sidebar"
+          >
+            <Menu size={20} />
+          </button>
+
+        </header>
+
+        {/* Dashboard Content */}
+        <main className="flex-1 overflow-y-auto">
+          <div className="p-4 md:p-6 lg:p-8">
+            <Dashboard />
+          </div>
+        </main>
+      </div>
+    </div>
+  )
+}
+
+export default App
