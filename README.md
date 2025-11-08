@@ -1,75 +1,103 @@
-# React + TypeScript + Vite
+# Streak Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and effective tool to help you build habits and track your progress by maintaining streaks.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📖 Table of Contents
 
-## React Compiler
+- [About the Project](#about-the-project)
+- [✨ Features](#-features)
+- [🛠️ Tech Stack](#-tech-stack)
+- [🚀 Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [🏃 Usage](#-usage)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+---
 
-Note: This will impact Vite dev & build performances.
+## About the Project
 
-## Expanding the ESLint configuration
+This project was born from the need for a straightforward and minimalist tool to build habits. The core idea is simple: track your daily progress for any habit and watch your streak grow.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+It's designed to be an easy-to-use application where you can simply mark each day as complete, helping you stay motivated and consistent on your journey to forming new, positive habits.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ✨ Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Add & Manage Habits:** Easily add new habits you want to track.
+- **Daily Check-ins:** Mark days as complete with a single click.
+- **Streak Visualization:** Clearly see your current streak for each habit.
+- **Clean & Minimalist UI:** A distraction-free interface to keep you focused on your goals.
+
+---
+
+## 🛠️ Tech Stack
+
+This project is built with a modern frontend stack:
+
+- **Framework:** [React](https://react.dev/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool:** [Vite](https://vitejs.dev/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+
+---
+
+## 🚀 Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+You need to have [Node.js](https://nodejs.org/) and a package manager like [npm](https://www.npmjs.com/get-npm), [Yarn](https://yarnpkg.com/), or [pnpm](https://pnpm.io/) installed.
+
+### Installation
+
+1.  Clone the repository:
+    ```sh
+    git clone https://github.com/YOUR_USERNAME/streak-tracker.git
+    ```
+2.  Navigate into the project directory:
+    ```sh
+    cd streak-tracker
+    ```
+3.  Install the dependencies:
+    ```sh
+    npm install
+    # or yarn install, or pnpm install
+    ```
+
+---
+
+## 🏃 Available Scripts
+
+**To start the development server:**
+```sh
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**To build the application for production:**
+```sh
+pnpm build
 ```
+
+*(Note: Please update the scripts above to match the ones in your `package.json` file.)*
+
+---
+
+## 🤝 Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+---
+
