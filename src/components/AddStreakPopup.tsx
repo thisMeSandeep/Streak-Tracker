@@ -5,7 +5,6 @@ import type { Streak } from "../types/types";
 import { useStreak } from "../hooks/useStreak";
 
 
-
 type InputType = {
     name: string;
     value: string;
@@ -25,7 +24,9 @@ const AddStreakPopup = ({ streakData, onClose }: PopupType) => {
     });
     const [error, setError] = useState<string>('')
 
-    const { addStreak } = useStreak()
+    console.log(streakData)
+
+    const { addStreak, updateStreak } = useStreak()
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value }: InputType = e.target
@@ -45,11 +46,14 @@ const AddStreakPopup = ({ streakData, onClose }: PopupType) => {
                 throw new Error('Title cannot be empty')
             }
 
-            addStreak(streak)
+            if (streakData) {
+                updateStreak(streak)
+            } else {
+                addStreak(streak)
+            }
             // clear the fields
             setStreak({ id: Date.now(), title: "", startDate: "", endDate: "" })
             onClose()
-
         } catch (err) {
             const message = err instanceof Error ? err.message : 'Something went wrong'
             setError(message)

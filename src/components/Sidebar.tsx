@@ -1,15 +1,23 @@
-import { useState } from "react"
-import { Plus, Trash2, Edit, Calendar } from "lucide-react"
+import { useEffect, useState } from "react"
+import { Plus, Trash2, Edit, Calendar, ArrowRight } from "lucide-react"
 import { useStreak } from "../hooks/useStreak"
 import AddStreakPopup from "./AddStreakPopup"
-import { Activity } from "react"
 import type { Streak } from "../types/types"
-
+import { useDashboard } from "../hooks/useDashboard"
+import { deleteStreakDataFromStorage } from "../utils/localStorageUtils"
 
 const Sidebar = () => {
   const [openPopup, setOpenPopup] = useState(false);
-  const [selectedStreak, setSelectedStreak] = useState<Streak | null>(null)
-  const { streaks, deleteStreak } = useStreak()
+  const [selectedStreak, setSelectedStreak] = useState<Streak | null>(null);
+
+  const { streaks, deleteStreak } = useStreak();
+  const { setStreakId } = useDashboard();
+
+  useEffect(() => {
+    if (streaks.length > 0) {
+      setStreakId(streaks[0].id);
+    }
+  }, [streaks, setStreakId]);
 
   return (
     <div className="w-full h-full flex flex-col bg-white">
@@ -39,7 +47,13 @@ const Sidebar = () => {
                 className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors"
               >
                 {/* Streak Title */}
-                <h3 className="font-medium text-gray-900 mb-3">{streak.title}</h3>
+                <button
+                  onClick={() => setStreakId(streak.id)}
+                  className="flex items-center justify-between w-full text-gray-900 group hover:cursor-pointer"
+                >
+                  <h3 className="font-medium mb-3">{streak.title}</h3>
+                  <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
 
                 {/* Dates */}
                 <div className="space-y-1.5 mb-3">
@@ -63,7 +77,10 @@ const Sidebar = () => {
                     Edit
                   </button>
                   <button
-                    onClick={() => deleteStreak(streak)}
+                    onClick={() => {
+                      deleteStreakDataFromStorage(streak.id);
+                      deleteStreak(streak);
+                    }}
                     className="flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-medium text-red-700 border border-red-300 rounded hover:bg-red-50 transition-colors"
                   >
                     <Trash2 size={14} />
@@ -76,15 +93,18 @@ const Sidebar = () => {
         )}
       </div>
 
-      {/* Popup  */}
-      <Activity mode={openPopup || selectedStreak ? 'visible' : 'hidden'}>
-        <AddStreakPopup streakData={selectedStreak} onClose={() => {
-          setOpenPopup(false);
-          setSelectedStreak(null);
-        }} />
-      </Activity>
+      {/* Popup */}
+      {(openPopup || selectedStreak) && (
+        <AddStreakPopup
+          streakData={selectedStreak}
+          onClose={() => {
+            setOpenPopup(false);
+            setSelectedStreak(null);
+          }}
+        />
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

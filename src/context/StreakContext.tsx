@@ -6,6 +6,7 @@ type StreakContextType = {
     addStreak: (streak: Streak) => void;
     deleteStreak: (streak: Streak) => void;
     updateStreak: (streak: Streak) => void;
+    getStreakDetails: (streakId: number) => Streak | null;
 };
 
 export const StreakContext = createContext<StreakContextType | undefined>(undefined);
@@ -47,8 +48,13 @@ const StreakProvider = ({ children }: { children: React.ReactNode }) => {
         setStreaks((prev) => prev.map((s) => (s.id === streak.id ? streak : s)));
     };
 
+    //  get a streak
+    const getStreakDetails = (streakId: number) => {
+        return streaks.find((s) => s.id === streakId) || null;
+    };
+
     return (
-        <StreakContext.Provider value={{ streaks, addStreak, deleteStreak, updateStreak }}>
+        <StreakContext.Provider value={{ streaks, addStreak, deleteStreak, updateStreak, getStreakDetails }}>
             {children}
         </StreakContext.Provider>
     );
