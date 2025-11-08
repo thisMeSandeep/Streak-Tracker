@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Dashboard from "./components/Dashboard"
 import Sidebar from "./components/Sidebar"
-import { Menu } from "lucide-react"
+import { Menu, X } from "lucide-react"
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -27,7 +27,21 @@ const App = () => {
           flex flex-col
         `}
       >
-        <Sidebar />
+        <div className="flex-1 overflow-y-auto pb-20 lg:pb-0">
+          <Sidebar />
+        </div>
+
+        {/* Close Button at Bottom - Mobile Only */}
+        <div className="lg:hidden fixed bottom-0 left-0 w-72 p-4 bg-white border-t border-gray-200">
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-700"
+            aria-label="Close sidebar"
+          >
+            <X size={20} />
+            <span className="font-medium">Close Sidebar</span>
+          </button>
+        </div>
       </aside>
 
       {/* Main Content */}
