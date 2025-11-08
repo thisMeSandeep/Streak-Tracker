@@ -47,7 +47,7 @@ const App = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Bar */}
-        <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center">
+        <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center lg:hidden">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="lg:hidden p-2 rounded-lg hover:bg-gray-100 mr-2"
@@ -68,7 +68,7 @@ const App = () => {
 
         {/* Dashboard Content */}
         <main className="flex-1 overflow-y-auto">
-          <div>
+          <div className="p-2 md:p-6 lg:p-8">
             <Dashboard />
           </div>
         </main>
