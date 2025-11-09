@@ -1,10 +1,10 @@
-import { useState } from "react"
 import Dashboard from "./components/Dashboard"
 import Sidebar from "./components/Sidebar"
 import { Menu, X } from "lucide-react"
+import { useDashboard } from "./hooks/useDashboard"
 
 const App = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { sidebarOpen, setSidebarOpen } = useDashboard();
 
   return (
     <div className="h-screen flex overflow-hidden bg-gray-50">

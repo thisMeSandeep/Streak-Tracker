@@ -11,7 +11,7 @@ const Sidebar = () => {
   const [selectedStreak, setSelectedStreak] = useState<Streak | null>(null);
 
   const { streaks, deleteStreak } = useStreak();
-  const { setStreakId } = useDashboard();
+  const { setStreakId, setSidebarOpen } = useDashboard();
 
   useEffect(() => {
     if (streaks.length > 0) {
@@ -48,7 +48,10 @@ const Sidebar = () => {
               >
                 {/* Streak Title */}
                 <button
-                  onClick={() => setStreakId(streak.id)}
+                  onClick={() => {
+                    setStreakId(streak.id);
+                    setSidebarOpen(false);
+                  }}
                   className="flex items-center justify-between w-full text-gray-900 group hover:cursor-pointer"
                 >
                   <h3 className="font-medium mb-3">{streak.title}</h3>
