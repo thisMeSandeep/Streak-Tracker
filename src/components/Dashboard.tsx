@@ -54,16 +54,19 @@ const Dashboard = () => {
         //  load existing data from localStorage
         const savedData = getStreakDataFromStorage(streak.id)
 
-        if (savedData) {
-            // Use saved data if it exists
-            setDays(savedData)
+        // Check if saved data exists and if the date range matches
+        if (savedData && 
+            savedData.startDate === streak.startDate && 
+            savedData.endDate === streak.endDate) {
+            // Use saved data if it exists and dates match
+            setDays(savedData.days)
         } else {
-            // Create new data if no saved data exists
+            // Create new data if no saved data exists or dates have changed
             const numDays = countDays(streak.startDate, streak.endDate)
             const newDays = Array.from({ length: numDays }, () => ({ marked: false }))
             setDays(newDays)
-            // Save the initial state
-            saveStreakDataToStorage(streak.id, newDays)
+            // Save the initial state with date range
+            saveStreakDataToStorage(streak.id, newDays, streak.startDate, streak.endDate)
         }
     }, [streak])
 
@@ -75,7 +78,7 @@ const Dashboard = () => {
         setDays(newDays)
 
         // Save to localStorage whenever a day is toggled
-        saveStreakDataToStorage(streak.id, newDays)
+        saveStreakDataToStorage(streak.id, newDays, streak.startDate, streak.endDate)
     }
 
     if (error) {
